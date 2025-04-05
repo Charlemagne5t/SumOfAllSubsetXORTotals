@@ -1,18 +1,15 @@
-public class Solution {
-    int res = 0;
+class Solution {
     public int subsetXORSum(int[] nums) {
-        for(int i = 0; i < nums.length; i++) {
-            dfs(nums, i, nums[i]);
+        int[] res = new int[1];
+        
+        dfs(nums, 0, 0, res);
+        return res[0]; 
+    }
+    void dfs(int[] nums, int i, int XOR, int[] res){
+        res[0] += XOR;
+        for(int j = i ; j < nums.length;j++){
+            dfs(nums, j + 1, XOR ^ nums[j], res);
         }
-
-        return res;
     }
 
-    void dfs(int[] nums, int i, int xor) {
-        res += xor;
-        for(int j = i + 1; j < nums.length; j++) {
-            dfs(nums, j, xor ^ nums[j]);
-        }
-
-    }
 }
